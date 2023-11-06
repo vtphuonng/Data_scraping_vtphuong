@@ -4,6 +4,7 @@ from telegram import ParseMode
 import prettytable as pt 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from pyvirtualdisplay import Display
 import pandas as pd
 import time
 from selenium.common.exceptions import NoSuchElementException
@@ -18,14 +19,13 @@ class scraping:
         driver = webdriver.Edge()
         driver.get(url)
         time.sleep(5)
-        driver.maximize_window()
-        time.sleep(3)
+        display = Display(visible=0, size=(800, 600))
+        display.start()
         y = 1080
         for i in range(2):
             driver.execute_script(f"window.scrollTo(0, {y})")
             y += 700 
             time.sleep(3)
-        # elements = driver.find_elements(By.CLASS_NAME, class_path)
         if find_tag != False:
             for tr in driver.find_elements(By.XPATH, class_path):
                 l1 = []
